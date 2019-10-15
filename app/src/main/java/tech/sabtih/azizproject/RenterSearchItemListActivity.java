@@ -17,11 +17,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import tech.sabtih.azizproject.dummy.DummyContent;
 import tech.sabtih.azizproject.dummy.DummyRentercar;
+import tech.sabtih.azizproject.fragments.RenterSearchItemDetailFragment;
 import tech.sabtih.azizproject.models.Renter_Car;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

@@ -11,21 +11,22 @@ import android.widget.TextView;
 import tech.sabtih.azizproject.R;
 import tech.sabtih.azizproject.dummy.DummyContent.DummyItem;
 import tech.sabtih.azizproject.listeners.OnRequestAcceptListener;
+import tech.sabtih.azizproject.listeners.OnRequestClickListener;
 import tech.sabtih.azizproject.models.SPrequest;
 
 import java.util.List;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
+
  * TODO: Replace the implementation with code for your data type.
  */
 public class MySPrequestRecyclerViewAdapter extends RecyclerView.Adapter<MySPrequestRecyclerViewAdapter.ViewHolder> {
 
     private final List<SPrequest> mValues;
-    private final OnRequestAcceptListener mListener;
+    private final OnRequestClickListener mListener;
 
-    public MySPrequestRecyclerViewAdapter(List<SPrequest> items, OnRequestAcceptListener listener) {
+    public MySPrequestRecyclerViewAdapter(List<SPrequest> items, OnRequestClickListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -46,11 +47,11 @@ public class MySPrequestRecyclerViewAdapter extends RecyclerView.Adapter<MySPreq
         holder.accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (null != mListener) {
+             //   if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    mListener.onRequestAccept(holder.mItem);
-                }
+                    mListener.onRequestClick(holder.mItem);
+             //   }
             }
         });
     }

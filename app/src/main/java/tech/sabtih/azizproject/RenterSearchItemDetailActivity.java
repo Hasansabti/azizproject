@@ -15,6 +15,8 @@ import androidx.appcompat.app.ActionBar;
 
 import android.view.MenuItem;
 
+import tech.sabtih.azizproject.fragments.RenterSearchItemDetailFragment;
+
 /**
  * An activity representing a single RenterSearchItem detail screen. This
  * activity is only used on narrow width devices. On tablet-size devices,

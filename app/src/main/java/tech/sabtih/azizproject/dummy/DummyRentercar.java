@@ -25,8 +25,8 @@ public class DummyRentercar {
         // Add some sample items.
 
 
-        addItem(createDummyItem(0,"Camry","mohammed",130));
-        addItem(createDummyItem(1,"Cerato","Aziz",230));
+        addItem(createDummyItem(0,"Camry","Toyota",130));
+        addItem(createDummyItem(1,"Cerato","Kia",230));
     }
 
     private static void addItem(Renter_Car item) {

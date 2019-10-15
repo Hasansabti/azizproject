@@ -9,10 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ResultActivity"></activity>
+        <activity android:name=".AddCarActivity"
+            android:label="Add Car"></activity>
+        <activity android:name=".ActivityProfile"
+            android:label="Profile"/>
+        <activity android:name=".Activity_SPRequest" />
+        <activity
+            android:name=".ResultActivity"
+            android:label="success" />
         <activity
             android:name=".RenterSearchItemListActivity"
-            android:label="@string/title_rentersearchitem_list"
+            android:label="Search Result"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".RenterSearchItemDetailActivity"

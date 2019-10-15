@@ -148,9 +148,9 @@ public class Activity_renter extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_home) {
+        if (id == R.id.add_car) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.edit_profile) {
 
         } else if (id == R.id.nav_slideshow) {
 

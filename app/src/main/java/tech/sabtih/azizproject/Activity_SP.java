@@ -1,6 +1,7 @@
 package tech.sabtih.azizproject;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -19,7 +20,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,12 +28,12 @@ import android.view.Menu;
 import java.util.ArrayList;
 
 import tech.sabtih.azizproject.adapters.MySPrequestRecyclerViewAdapter;
-import tech.sabtih.azizproject.dummy.DummyContent;
 import tech.sabtih.azizproject.listeners.OnRequestAcceptListener;
+import tech.sabtih.azizproject.listeners.OnRequestClickListener;
 import tech.sabtih.azizproject.models.SPrequest;
 
 public class Activity_SP extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, OnRequestAcceptListener {
+        implements NavigationView.OnNavigationItemSelectedListener, OnRequestAcceptListener, OnRequestClickListener {
 RecyclerView requests;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,9 +112,12 @@ RecyclerView requests;
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.add_car) {
+            Intent intent = new Intent(this,AddCarActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.edit_profile) {
+            Intent intent = new Intent(this,ActivityProfile.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_slideshow) {
 
@@ -134,5 +137,13 @@ RecyclerView requests;
     @Override
     public void onRequestAccept(SPrequest item) {
         item.setAccepted(true);
+    }
+
+    @Override
+    public void onRequestClick(SPrequest item) {
+        Intent intent = new Intent(this,Activity_SPRequest.class);
+        intent.putExtra("car",item.getCarname());
+        intent.putExtra("details","Details about "+item.getCarname());
+        startActivity(intent);
     }
 }

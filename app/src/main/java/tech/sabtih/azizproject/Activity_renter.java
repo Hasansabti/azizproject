@@ -23,25 +23,46 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class Activity_renter extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     //date
     final Calendar myCalendar = Calendar.getInstance();
-    EditText edittextstart;
-    EditText edittextend;
+    TextView edittextstart;
+    TextView edittextend;
     Button submit;
+    Calendar calendar;
+    Date startDate;
+    Date endDate;
+    SimpleDateFormat sdf;
+    ImageView cityimage;
+
+    View location;
+    View city;
+
+
+    CheckBox gps;
+    CheckBox deliver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_renter);
+        sdf=new SimpleDateFormat("dd/MM/yy",Locale.getDefault());
+        calendar=Calendar.getInstance();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -52,6 +73,10 @@ public class Activity_renter extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
+
+        location = findViewById(R.id.locationll);
+        cityimage = findViewById(R.id.cityimg);
+        city  =findViewById(R.id.city);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -59,9 +84,28 @@ public class Activity_renter extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        gps = findViewById(R.id.gps);
+
+        gps.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    location.setVisibility(View.VISIBLE);
+                    city.setVisibility(View.GONE);
+                    cityimage.setVisibility(View.GONE);
+                }else{
+                    location.setVisibility(View.GONE);
+                    city.setVisibility(View.VISIBLE);
+                    cityimage.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
         edittextstart = findViewById(R.id.start);
         edittextend = findViewById(R.id.end);
-        submit = findViewById(R.id.submitbtn);
+        submit = findViewById(R.id.search);
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,33 +120,57 @@ public class Activity_renter extends AppCompatActivity
             }
         });
 
-        View.OnFocusChangeListener dt = new View.OnFocusChangeListener() {
+
+        edittextstart.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onFocusChange(final View v, boolean b) {
-                if(b){
-                    // TODO Auto-generated method stub
-                    new DatePickerDialog(Activity_renter.this, new DatePickerDialog.OnDateSetListener() {
-
+            public void onClick(View v) {
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                    final DatePickerDialog pickerDialog=new DatePickerDialog(Activity_renter.this);
+                    pickerDialog.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
                         @Override
-                        public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                              int dayOfMonth) {
-                            // TODO Auto-generated method stub
-                            myCalendar.set(Calendar.YEAR, year);
-                            myCalendar.set(Calendar.MONTH, monthOfYear);
-                            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                            updateLabel((EditText) v);
+                        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                            calendar.set(year,month,dayOfMonth);
+                            startDate = calendar.getTime();
+                            if(startDate.before(new Date())){
+                                makeToast("Invalid start date");
+                            }
+                            else{
+                                edittextstart.setText(sdf.format(startDate));
+                                pickerDialog.dismiss();
+                            }
                         }
-
-                    }, myCalendar
-                            .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                            myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                    });
+                    pickerDialog.show();
                 }
             }
-        };
-        edittextstart.setOnFocusChangeListener(dt);
-        edittextend.setOnFocusChangeListener(dt);
+        });
+        edittextend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                    final DatePickerDialog pickerDialog=new DatePickerDialog(Activity_renter.this);
+                    pickerDialog.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                            calendar.set(year,month,dayOfMonth);
+                            endDate = calendar.getTime();
+                            if(!endDate.after(new Date())){
+                                makeToast("Invalid end date");
+                            }else{
+                                edittextend.setText(sdf.format(endDate));
+                                pickerDialog.dismiss();
+                            }
+                        }
+                    });
+                    pickerDialog.show();
+                }
+            }
+        });
 
 
+    }
+    private void makeToast(String msg){
+        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
     }
     private void updateLabel(EditText edittext) {
         String myFormat = "MM/dd/yy"; //In which you need put here
@@ -156,12 +224,10 @@ public class Activity_renter extends AppCompatActivity
 
         } else if (id == R.id.nav_tools) {
 
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.logout) {
+            finish();
 
         }
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

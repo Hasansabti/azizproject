@@ -44,7 +44,7 @@ public class MySPrequestRecyclerViewAdapter extends RecyclerView.Adapter<MySPreq
         holder.car.setText(mValues.get(position).getName() +"-"+ mValues.get(position).getCarname());
 
 
-        holder.accept.setOnClickListener(new View.OnClickListener() {
+        holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
              //   if (null != mListener) {
@@ -66,14 +66,14 @@ public class MySPrequestRecyclerViewAdapter extends RecyclerView.Adapter<MySPreq
 
         public final TextView car;
         public SPrequest mItem;
-        public Button accept;
+        //public Button accept;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
 
             car = (TextView) view.findViewById(R.id.carname);
-            accept = view.findViewById(R.id.accept);
+           // accept = view.findViewById(R.id.accept);
         }
 
         @Override

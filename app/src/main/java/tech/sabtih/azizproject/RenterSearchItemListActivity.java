@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 
@@ -44,9 +45,9 @@ public class RenterSearchItemListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rentersearchitem_list);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        toolbar.setTitle(getTitle());
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+       // setSupportActionBar(toolbar);
+        //toolbar.setTitle(getTitle());
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -57,12 +58,12 @@ public class RenterSearchItemListActivity extends AppCompatActivity {
             }
         });
 
-        if (findViewById(R.id.rentersearchitem_detail_container) != null) {
+        if (findViewById(R.id.rentersearchitem_list) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-w900dp).
             // If this view is present, then the
             // activity should be in two-pane mode.
-            mTwoPane = true;
+          //  mTwoPane = true;
         }
 
         View recyclerView = findViewById(R.id.rentersearchitem_list);
@@ -71,7 +72,7 @@ public class RenterSearchItemListActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-
+        recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
 
         recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this, DummyRentercar.ITEMS, mTwoPane));
     }
@@ -92,7 +93,7 @@ public class RenterSearchItemListActivity extends AppCompatActivity {
                     RenterSearchItemDetailFragment fragment = new RenterSearchItemDetailFragment();
                     fragment.setArguments(arguments);
                     mParentActivity.getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.rentersearchitem_detail_container, fragment)
+                            .replace(R.id.rentersearchitem_list, fragment)
                             .commit();
                 } else {
                     Context context = view.getContext();
@@ -146,7 +147,7 @@ public class RenterSearchItemListActivity extends AppCompatActivity {
             ViewHolder(View view) {
                 super(view);
                 name =  view.findViewById(R.id.name);
-                owner =  view.findViewById(R.id.owner);
+                owner =  view.findViewById(R.id.company);
                 price =  view.findViewById(R.id.price);
 
             }

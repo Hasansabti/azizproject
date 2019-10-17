@@ -65,7 +65,7 @@ public class RenterSearchItemDetailActivity extends AppCompatActivity {
             RenterSearchItemDetailFragment fragment = new RenterSearchItemDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.rentersearchitem_detail_container, fragment)
+                    .add(R.id.rentersearchitem_list, fragment)
                     .commit();
         }
     }

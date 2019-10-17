@@ -72,7 +72,7 @@ public class RenterSearchItemRVAdapter extends RecyclerView.Adapter<RenterSearch
             mView = view;
 
             car = (TextView) view.findViewById(R.id.carname);
-            accept = view.findViewById(R.id.accept);
+           // accept = view.findViewById(R.id.accept);
         }
 
         @Override

@@ -2,23 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:gravity="center"
     android:orientation="horizontal">
 
     <TextView
         android:id="@+id/carname"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="58dp"
         android:layout_weight="5"
+        android:gravity="center"
         android:text="Aziz - Camry"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="18sp" />
 
     <Button
-        android:id="@+id/accept"
-        style="@style/Widget.AppCompat.Button"
+        android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="AC" />
+        android:layout_weight="2"
+        android:text="View"
+        android:textColor="@color/colorPrimary" />
+
 </LinearLayout>

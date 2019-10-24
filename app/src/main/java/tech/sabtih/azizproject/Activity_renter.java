@@ -216,10 +216,15 @@ public class Activity_renter extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.add_car) {
-            // Handle the camera action
-        } else if (id == R.id.edit_profile) {
+        if (id == R.id.profile) {
 
+            Intent intent = new Intent(this,ActivityProfile.class);
+            startActivity(intent);
+
+            // Handle the camera action
+        } else if (id == R.id.search) {
+            Intent intent = new Intent(this,RenterSearchItemListActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_tools) {

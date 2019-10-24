@@ -47,8 +47,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|start"
         android:layout_margin="@dimen/fab_margin"
+        android:visibility="invisible"
         app:layout_anchor="@+id/rentersearchitem_list"
         app:layout_anchorGravity="top|end"
-        app:srcCompat="@android:drawable/stat_notify_chat" />
+        app:srcCompat="@android:drawable/stat_notify_chat"
+        tools:visibility="invisible" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

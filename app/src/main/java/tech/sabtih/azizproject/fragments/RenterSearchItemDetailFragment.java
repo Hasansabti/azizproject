@@ -73,7 +73,7 @@ public class RenterSearchItemDetailFragment extends Fragment {
         bookbtn = rootView.findViewById(R.id.acceptbtn);
         // Show the dummy content as text in a TextView.
         if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.details)).setText(mItem.getDetails());
+           // ((TextView) rootView.findViewById(R.id.owner)).setText(mItem.getDetails());
         }
 
         bookbtn.setOnClickListener(new View.OnClickListener() {

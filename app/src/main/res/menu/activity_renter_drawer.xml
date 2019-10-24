@@ -9,7 +9,7 @@
             android:icon="@drawable/usernmae"
             android:title="Profile" />
         <item
-            android:id="@+id/edit_profile"
+            android:id="@+id/search"
             android:icon="@drawable/search"
             android:title="Search" />
         <item

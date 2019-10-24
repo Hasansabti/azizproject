@@ -27,7 +27,7 @@ import android.view.Menu;
 
 import java.util.ArrayList;
 
-import tech.sabtih.azizproject.adapters.MySPrequestRecyclerViewAdapter;
+import tech.sabtih.azizproject.adapters.RequestsAdapter;
 import tech.sabtih.azizproject.listeners.OnRequestAcceptListener;
 import tech.sabtih.azizproject.listeners.OnRequestClickListener;
 import tech.sabtih.azizproject.models.SPrequest;
@@ -41,14 +41,8 @@ RecyclerView requests;
         setContentView(R.layout.activity__sp);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -70,7 +64,7 @@ RecyclerView requests;
 
             requests.setLayoutManager(new LinearLayoutManager(context));
 
-            requests.setAdapter(new MySPrequestRecyclerViewAdapter(requestdata, this));
+            requests.setAdapter(new RequestsAdapter(requestdata, this));
         }
     }
 

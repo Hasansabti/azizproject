@@ -9,27 +9,24 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import tech.sabtih.azizproject.R;
-import tech.sabtih.azizproject.dummy.DummyContent.DummyItem;
-import tech.sabtih.azizproject.listeners.OnRequestAcceptListener;
+
 import tech.sabtih.azizproject.listeners.OnRequestClickListener;
 import tech.sabtih.azizproject.models.SPrequest;
 
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
 
- * TODO: Replace the implementation with code for your data type.
- */
-public class MySPrequestRecyclerViewAdapter extends RecyclerView.Adapter<MySPrequestRecyclerViewAdapter.ViewHolder> {
+public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.ViewHolder> {
 
     private final List<SPrequest> mValues;
     private final OnRequestClickListener mListener;
 
-    public MySPrequestRecyclerViewAdapter(List<SPrequest> items, OnRequestClickListener listener) {
+    public RequestsAdapter(List<SPrequest> items, OnRequestClickListener listener) {
         mValues = items;
         mListener = listener;
     }
+
+    //ثابته في الاندرويد
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -37,7 +34,7 @@ public class MySPrequestRecyclerViewAdapter extends RecyclerView.Adapter<MySPreq
                 .inflate(R.layout.service_provider_item, parent, false);
         return new ViewHolder(view);
     }
-
+//تعبي التكستفيو
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
@@ -47,9 +44,7 @@ public class MySPrequestRecyclerViewAdapter extends RecyclerView.Adapter<MySPreq
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             //   if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
+             //   take to sp request detail
                     mListener.onRequestClick(holder.mItem);
              //   }
             }
@@ -61,16 +56,19 @@ public class MySPrequestRecyclerViewAdapter extends RecyclerView.Adapter<MySPreq
         return mValues.size();
     }
 
+    //create textview, buttons
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
 
         public final TextView car;
+        Button button;
         public SPrequest mItem;
         //public Button accept;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
+            button = view.findViewById(R.id.button2);
 
             car = (TextView) view.findViewById(R.id.carname);
            // accept = view.findViewById(R.id.accept);

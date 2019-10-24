@@ -30,8 +30,6 @@ import java.util.Locale;
 public class AddCarActivity extends AppCompatActivity {
 
 
-
-
     //image
     private static final int READ_REQUEST_CODE = 42;
     static final int CAMERA_REQUEST_CODE = 1;
@@ -48,29 +46,18 @@ public class AddCarActivity extends AppCompatActivity {
     Spinner company;
     Spinner cars;
     Spinner models;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_car);
 
 
-company = findViewById(R.id.company);
-cars = findViewById(R.id.car_names);
-models = findViewById(R.id.car_model);
-/*
-company.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        if(i ==0){
-            cars.setAdapter( ArrayAdapter.createFromResource (AddCarActivity.this,R.array.Toyota,android.R.layout.simple_spinner_item));
+        company = findViewById(R.id.company);
+        cars = findViewById(R.id.car_names);
+        models = findViewById(R.id.car_model);
 
-        }else if(i == 1){
-            cars.setAdapter( ArrayAdapter.createFromResource (AddCarActivity.this,R.array.Kia,android.R.layout.simple_spinner_item));
 
-        }
-    }
-});
-*/
         //image
         imageviewcarpic = findViewById(R.id.carpic);
 
@@ -78,6 +65,7 @@ company.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onClick(View view) {
+                //open the camera
                 captureFromCamera();
 
 
@@ -85,16 +73,10 @@ company.setOnItemClickListener(new AdapterView.OnItemClickListener() {
         });
 
 
-
-
-
-
-
-
         //date
-        edittextIns= findViewById(R.id.insdate);
-        edittextAva= findViewById(R.id.avdate);
-        edittextCarE= findViewById(R.id.cledate);
+        edittextIns = findViewById(R.id.insdate);
+        edittextAva = findViewById(R.id.avdate);
+        edittextCarE = findViewById(R.id.cledate);
 
         View.OnClickListener pdate = new View.OnClickListener() {
 
@@ -131,31 +113,20 @@ company.setOnItemClickListener(new AdapterView.OnItemClickListener() {
         edittext.setText(sdf.format(myCalendar.getTime()));
     }
 
-    //image
-    private void pickFromGallery(){
-        //Create an Intent with action as ACTION_PICK
-        Intent intent=new Intent(Intent.ACTION_PICK);
-        // Sets the type as image/*. This ensures only components of type image are selected
-        intent.setType("image/*");
-        //We pass an extra array with the accepted mime types. This will ensure only components with these MIME types as targeted.
-        String[] mimeTypes = {"image/jpeg", "image/png"};
-        intent.putExtra(Intent.EXTRA_MIME_TYPES,mimeTypes);
-        // Launching the Intent
-        startActivityForResult(intent,GALLERY_REQUEST_CODE);
+//image
 
-    }
     private String cameraFilePath;
 
-    public void onActivityResult(int requestCode,int resultCode,Intent data){
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         // Result code is RESULT_OK only if the user selects an Image
         if (resultCode == Activity.RESULT_OK)
-            switch (requestCode){
+            switch (requestCode) {
                 case GALLERY_REQUEST_CODE:
                     //data.getData return the content URI for the selected Image
                     Uri selectedImage = data.getData();
 
-                    String[] filePathColumn = { MediaStore.Images.Media.DATA };
+                    String[] filePathColumn = {MediaStore.Images.Media.DATA};
                     // Get the cursor
                     Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
                     // Move to first row
@@ -175,9 +146,10 @@ company.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     break;
 
             }
-        super.onActivityResult(requestCode,resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
 
     }
+
     private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -194,6 +166,7 @@ company.setOnItemClickListener(new AdapterView.OnItemClickListener() {
         cameraFilePath = "file://" + image.getAbsolutePath();
         return image;
     }
+
     private void captureFromCamera() {
         try {
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

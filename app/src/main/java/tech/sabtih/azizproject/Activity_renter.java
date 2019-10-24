@@ -45,6 +45,7 @@ public class Activity_renter extends AppCompatActivity
     TextView edittextstart;
     TextView edittextend;
     Button submit;
+
     Calendar calendar;
     Date startDate;
     Date endDate;
@@ -57,26 +58,32 @@ public class Activity_renter extends AppCompatActivity
 
     CheckBox gps;
     CheckBox deliver;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_renter);
-        sdf=new SimpleDateFormat("dd/MM/yy",Locale.getDefault());
-        calendar=Calendar.getInstance();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
+
+
+        sdf=new SimpleDateFormat("dd/MM/yy",Locale.getDefault());
+        calendar=Calendar.getInstance();
+
+
 
         location = findViewById(R.id.locationll);
         cityimage = findViewById(R.id.cityimg);
         city  =findViewById(R.id.city);
+        gps = findViewById(R.id.gps);
+        edittextstart = findViewById(R.id.start);
+        edittextend = findViewById(R.id.end);
+        submit = findViewById(R.id.search);
+
+        //Drawer
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -86,7 +93,7 @@ public class Activity_renter extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        gps = findViewById(R.id.gps);
+
 
         gps.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -103,16 +110,16 @@ public class Activity_renter extends AppCompatActivity
             }
         });
 
-        edittextstart = findViewById(R.id.start);
-        edittextend = findViewById(R.id.end);
-        submit = findViewById(R.id.search);
 
+//Cant move until fill the fields
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if(edittextend.getText().toString().isEmpty() || edittextstart.getText().toString().isEmpty()){
                     Toast.makeText(Activity_renter.this,"Missing info",Toast.LENGTH_SHORT).show();
                     return;
+
                 }
                 Intent intent = new Intent(Activity_renter.this,RenterSearchItemListActivity.class);
                 startActivity(intent);
@@ -120,7 +127,7 @@ public class Activity_renter extends AppCompatActivity
             }
         });
 
-
+//Start date
         edittextstart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -144,6 +151,8 @@ public class Activity_renter extends AppCompatActivity
                 }
             }
         });
+
+        //End date
         edittextend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -172,12 +181,7 @@ public class Activity_renter extends AppCompatActivity
     private void makeToast(String msg){
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
     }
-    private void updateLabel(EditText edittext) {
-        String myFormat = "MM/dd/yy"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
-        edittext.setText(sdf.format(myCalendar.getTime()));
-    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

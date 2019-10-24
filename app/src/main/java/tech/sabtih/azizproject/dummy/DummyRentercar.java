@@ -27,6 +27,7 @@ public class DummyRentercar {
 
         addItem(createDummyItem(0,"Camry","Toyota",130));
         addItem(createDummyItem(1,"Cerato","Kia",230));
+        addItem(createDummyItem(3,"BBBB","Kia",230));
     }
 
     private static void addItem(Renter_Car item) {
@@ -41,9 +42,7 @@ public class DummyRentercar {
     private static String makeDetails(int position) {
         StringBuilder builder = new StringBuilder();
         builder.append("Details about Item: ").append(position);
-        for (int i = 0; i < position; i++) {
-            builder.append("\nMore details information here.");
-        }
+
         return builder.toString();
     }
 

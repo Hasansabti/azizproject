@@ -15,6 +15,7 @@ Button accept;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sprequest);
+
         details = findViewById(R.id.details);
         accept = findViewById(R.id.acceptbtn);
         setTitle(getIntent().getStringExtra("car"));

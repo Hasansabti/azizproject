@@ -74,7 +74,7 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.ViewHo
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            button = view.findViewById(R.id.button2);
+           // button = view.findViewById(R.id.button2);
 
             car = (TextView) view.findViewById(R.id.carname);
            // accept = view.findViewById(R.id.accept);

@@ -30,4 +30,6 @@
     <string name="title_rentersearchitem_detail">RenterSearchItem Detail</string>
     <string name="title_ride_list">Rides</string>
     <string name="title_ride_detail">Ride Detail</string>
+    <string name="title_spcar_list">SPcars</string>
+    <string name="title_spcar_detail">SPcar Detail</string>
 </resources>

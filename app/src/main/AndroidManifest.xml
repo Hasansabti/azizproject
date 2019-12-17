@@ -20,9 +20,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".SPcarListActivity"
+            android:label="@string/title_spcar_list"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".SPcarDetailActivity"
+            android:label="@string/title_spcar_detail"
+            android:parentActivityName=".SPcarListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="tech.carrental.azizproject.SPcarListActivity" />
+        </activity>
+        <activity
             android:name=".RideListActivity"
             android:label="@string/title_ride_list"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".RideDetailActivity"
             android:label="@string/title_ride_detail"
@@ -44,7 +57,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"></meta-data>
+                android:resource="@xml/file_paths" />
         </provider>
 
         <meta-data

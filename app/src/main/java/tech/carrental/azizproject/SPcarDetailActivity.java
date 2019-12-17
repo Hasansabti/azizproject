@@ -15,20 +15,18 @@ import androidx.appcompat.app.ActionBar;
 
 import android.view.MenuItem;
 
-import tech.carrental.azizproject.fragments.RideDetailFragment;
-
 /**
- * An activity representing a single Ride detail screen. This
+ * An activity representing a single SPcar detail screen. This
  * activity is only used on narrow width devices. On tablet-size devices,
  * item details are presented side-by-side with a list of items
- * in a {@link RideListActivity}.
+ * in a {@link SPcarListActivity}.
  */
-public class RideDetailActivity extends AppCompatActivity {
+public class SPcarDetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ride_detail);
+        setContentView(R.layout.activity_spcar_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
 
@@ -60,14 +58,14 @@ public class RideDetailActivity extends AppCompatActivity {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
             Bundle arguments = new Bundle();
-            arguments.putString(RideDetailFragment.ARG_ITEM_ID,
-                    getIntent().getStringExtra(RideDetailFragment.ARG_ITEM_ID));
+            arguments.putString(SPcarDetailFragment.ARG_ITEM_ID,
+                    getIntent().getStringExtra(SPcarDetailFragment.ARG_ITEM_ID));
             arguments.putString("carname",
                     getIntent().getStringExtra("carname"));
-            RideDetailFragment fragment = new RideDetailFragment();
+            SPcarDetailFragment fragment = new SPcarDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.ride_detail_container, fragment)
+                    .add(R.id.spcar_detail_container, fragment)
                     .commit();
         }
     }
@@ -82,7 +80,7 @@ public class RideDetailActivity extends AppCompatActivity {
             //
             // http://developer.android.com/design/patterns/navigation.html#up-vs-back
             //
-            navigateUpTo(new Intent(this, RideListActivity.class));
+            navigateUpTo(new Intent(this, SPcarListActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);

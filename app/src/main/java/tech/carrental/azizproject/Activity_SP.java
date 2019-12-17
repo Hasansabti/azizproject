@@ -209,8 +209,10 @@ public class Activity_SP extends AppCompatActivity
             Intent intent = new Intent(this,ActivityProfile.class);
             startActivity(intent);
 
-        } else if (id == R.id.renter_history) {
+        } else if (id == R.id.mycars) {
 
+            Intent intent = new Intent(this,SPcarListActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_tools) {
 
         } else if (id == R.id.logout) {

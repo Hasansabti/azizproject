@@ -2,6 +2,7 @@ package tech.carrental.azizproject;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,6 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -18,16 +22,18 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import tech.carrental.azizproject.dummy.DummyContent;
-import tech.carrental.azizproject.fragments.RideDetailFragment;
 import tech.carrental.azizproject.models.Car;
 import tech.carrental.azizproject.models.Renter_Car;
 
@@ -35,14 +41,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * An activity representing a list of Rides. This activity
+ * An activity representing a list of SPcars. This activity
  * has different presentations for handset and tablet-size devices. On
  * handsets, the activity presents a list of items, which when touched,
- * lead to a {@link RideDetailActivity} representing
+ * lead to a {@link SPcarDetailActivity} representing
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  */
-public class RideListActivity extends AppCompatActivity {
+public class SPcarListActivity extends AppCompatActivity {
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -50,27 +56,19 @@ public class RideListActivity extends AppCompatActivity {
      */
     private boolean mTwoPane;
     private DatabaseReference mDatabase;
-
-    ArrayList<Renter_Car> rents;
-    private static ArrayList<Car> cars;
-    private SimpleItemRecyclerViewAdapter adapter;
+    ArrayList<Car> mycars;
+    SimpleItemRecyclerViewAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ride_list);
-        rents = new ArrayList<>();
-        cars = new ArrayList<>();
-
+        setTitle("My cars");
+        setContentView(R.layout.activity_spcar_list);
+        mycars = new ArrayList<>();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
-
-        // Show the Up button in the action bar.
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -80,11 +78,12 @@ public class RideListActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-        // [START initialize_database_ref]
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        // [END initialize_database_ref]
-
-        if (findViewById(R.id.ride_detail_container) != null) {
+        // Show the Up button in the action bar.
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+        if (findViewById(R.id.spcar_detail_container) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-w900dp).
             // If this view is present, then the
@@ -92,31 +91,9 @@ public class RideListActivity extends AppCompatActivity {
             mTwoPane = true;
         }
 
-        View recyclerView = findViewById(R.id.ride_list);
+        View recyclerView = findViewById(R.id.spcar_list);
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);
-
-        mDatabase.child("cars").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (cars.size() > 0)
-                    cars.clear();
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-
-                    Car car = ds.getValue(Car.class);
-                    cars.add(car);
-
-
-
-                }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed: " + databaseError.getCode());
-            }
-        });
     }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -129,20 +106,22 @@ public class RideListActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        adapter = new SimpleItemRecyclerViewAdapter(this, rents, mTwoPane);
+        adapter = new SimpleItemRecyclerViewAdapter(this, mycars, mTwoPane);
+        recyclerView.setAdapter(adapter);
 
-        mDatabase.child("rents").orderByChild("requesterid").equalTo(FirebaseAuth.getInstance().getUid()).addValueEventListener(new ValueEventListener() {
+
+        mDatabase.child("cars").orderByChild("userid").equalTo(FirebaseAuth.getInstance().getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (rents.size() > 0)
-                    rents.clear();
+                if (mycars.size() > 0)
+                    mycars.clear();
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
-                    Renter_Car car = ds.getValue(Renter_Car.class);
-                    rents.add(car);
+                    Car car = ds.getValue(Car.class);
+                    mycars.add(car);
 
 
-                    Log.d("car", car.getCarid());
+                    Log.d("car", car.getName());
                 }
                 if (adapter != null)
                     adapter.notifyDataSetChanged();
@@ -153,45 +132,32 @@ public class RideListActivity extends AppCompatActivity {
                 System.out.println("The read failed: " + databaseError.getCode());
             }
         });
-
-        recyclerView.setAdapter(adapter);
-
-
     }
 
     public static class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
-        private final RideListActivity mParentActivity;
-        private final List<Renter_Car> mValues;
+        private final SPcarListActivity mParentActivity;
+        private final List<Car> mValues;
         private final boolean mTwoPane;
         private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Renter_Car item = (Renter_Car) view.getTag();
+                Car item = (Car) view.getTag();
                 if (mTwoPane) {
                     Bundle arguments = new Bundle();
-                    arguments.putString(RideDetailFragment.ARG_ITEM_ID, item.getId());
-                    RideDetailFragment fragment = new RideDetailFragment();
+                    arguments.putString(SPcarDetailFragment.ARG_ITEM_ID, item.getUuid());
+                    arguments.putString("carname", item.getName());
+                    SPcarDetailFragment fragment = new SPcarDetailFragment();
                     fragment.setArguments(arguments);
                     mParentActivity.getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.ride_detail_container, fragment)
+                            .replace(R.id.spcar_detail_container, fragment)
                             .commit();
                 } else {
                     Context context = view.getContext();
-                    Intent intent = new Intent(context, RideDetailActivity.class);
-                    intent.putExtra(RideDetailFragment.ARG_ITEM_ID, item.getId());
-                    for(Car car : cars){
-                        if(car.getUuid().equalsIgnoreCase(item.getCarid())){
-
-                            intent.putExtra("carname", car.getName());
-
-                            break;
-                        }
-
-
-
-                    }
+                    Intent intent = new Intent(context, SPcarDetailActivity.class);
+                    intent.putExtra(SPcarDetailFragment.ARG_ITEM_ID, item.getUuid());
+                    intent.putExtra("carname", item.getName());
 
 
                     context.startActivity(intent);
@@ -199,8 +165,8 @@ public class RideListActivity extends AppCompatActivity {
             }
         };
 
-        SimpleItemRecyclerViewAdapter(RideListActivity parent,
-                                      List<Renter_Car> items,
+        SimpleItemRecyclerViewAdapter(SPcarListActivity parent,
+                                      List<Car> items,
                                       boolean twoPane) {
             mValues = items;
             mParentActivity = parent;
@@ -210,26 +176,33 @@ public class RideListActivity extends AppCompatActivity {
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.previous_rents_item, parent, false);
+                    .inflate(R.layout.spcar_list_content, parent, false);
             return new ViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
-            for(Car car : cars){
-                if(car.getUuid().equalsIgnoreCase(mValues.get(position).getCarid())){
+            holder.carname.setText(mValues.get(position).getName());
+            holder.num.setText(""+(position+1));
 
-                    holder.carname.setText(car.getName());
-
-                    break;
-                }
-
-
-
-            }
-            holder.price.setText(mValues.get(position).getPrice()+" SR");
-
-            holder.date.setText("Status: "+mValues.get(position).getStatus());
+            StorageReference storageRef =
+                    FirebaseStorage.getInstance().getReference();
+            storageRef.child("images/"+mValues.get(position).getUuid()).getDownloadUrl()
+                    .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            // Got the download URL for 'users/me/profile.png'
+                            Glide.with(mParentActivity)
+                                    .load(uri)
+                                    .into(holder.carimage);
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            // Handle any errors
+                        }
+                    });
 
             holder.itemView.setTag(mValues.get(position));
             holder.itemView.setOnClickListener(mOnClickListener);
@@ -241,15 +214,15 @@ public class RideListActivity extends AppCompatActivity {
         }
 
         class ViewHolder extends RecyclerView.ViewHolder {
+            final TextView num;
             final TextView carname;
-            final TextView date;
-            final TextView price;
+            final ImageView carimage;
 
             ViewHolder(View view) {
                 super(view);
+                num = (TextView) view.findViewById(R.id.num);
                 carname = (TextView) view.findViewById(R.id.carname);
-                date = (TextView) view.findViewById(R.id.date);
-                price = (TextView) view.findViewById(R.id.price);
+                carimage = view.findViewById(R.id.carimg);
             }
         }
     }

@@ -57,8 +57,8 @@
                     android:id="@+id/cityimg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignEnd="@+id/city"
-                    android:layout_alignBottom="@+id/city"
+                    android:layout_alignEnd="@+id/input_city"
+                    android:layout_alignBottom="@+id/input_city"
                     android:elevation="8dp"
                     android:padding="12dp"
                     android:src="@drawable/ic_pin_drop_black_24dp" />
@@ -109,7 +109,7 @@
                     android:visibility="gone">
 
                     <TextView
-                        android:id="@+id/location"
+                        android:id="@+id/input_location"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -127,25 +127,31 @@
                         android:padding="12dp"
                         android:src="@drawable/ic_my_location_black_24dp" />
                 </LinearLayout>
-                <TextView
-                    android:layout_below="@+id/locationll"
-                    android:id="@+id/city"
-                    android:padding="16dp"
-                    android:backgroundTint="#cfd8dc"
-                    android:background="@drawable/round_corner"
-                    android:gravity="center_vertical"
-                    android:layout_margin="16dp"
-                    android:text="Your City"
-                    android:textColor="#000000"
+
+                <Spinner
+                    android:id="@+id/input_city"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp" />
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/locationll"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/round_corner"
+                    android:backgroundTint="#cfd8dc"
+                    android:entries="@array/cities"
+                    android:gravity="center_vertical"
+                    android:padding="16dp"
+                    android:text="Your City"
+                    android:textColor="#000000" />
             </RelativeLayout>
+
             <ProgressBar
-                android:visibility="gone"
                 android:id="@+id/pb_address"
-                android:layout_below="@+id/datepickers"
                 android:layout_width="match_parent"
-                android:layout_height="40dp" />
+                android:layout_height="40dp"
+                android:layout_below="@+id/datepickers"
+                android:visibility="gone" />
 
             <RelativeLayout
                 android:id="@+id/choose_location_rl"

@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "482833546686",
+    "firebase_url": "https://outstation-ad034.firebaseio.com",
+    "project_id": "outstation-ad034",
+    "storage_bucket": "outstation-ad034.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:482833546686:android:f0d3a8c69cec39f47dcdef",
+        "android_client_info": {
+          "package_name": "com.example.himanshupalve.carrental"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "482833546686-37nai4k3vvk5pi5mcdqons28utcq7h5h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMhlhVIInoL5iRYo18RdTbL8GJ-iSNv1k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "482833546686-37nai4k3vvk5pi5mcdqons28utcq7h5h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:482833546686:android:13bc49ed974df49e7dcdef",
+        "android_client_info": {
+          "package_name": "tech.carrental.azizproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "482833546686-37nai4k3vvk5pi5mcdqons28utcq7h5h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMhlhVIInoL5iRYo18RdTbL8GJ-iSNv1k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "482833546686-37nai4k3vvk5pi5mcdqons28utcq7h5h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

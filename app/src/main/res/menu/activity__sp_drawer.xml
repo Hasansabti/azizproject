@@ -12,6 +12,10 @@
             android:id="@+id/edit_profile"
 
             android:title="Edit Profile" />
+        <item
+            android:id="@+id/logout"
+
+            android:title="Logout" />
 
     </group>
 

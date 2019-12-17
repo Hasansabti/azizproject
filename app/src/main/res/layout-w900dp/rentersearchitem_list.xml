@@ -27,7 +27,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         app:layoutManager="LinearLayoutManager"
-        tools:context="tech.sabtih.azizproject.RenterSearchItemListActivity"
+        tools:context="tech.carrental.azizproject.RenterSearchItemListActivity"
         tools:listitem="@layout/search_result_item"/>
 
     <FrameLayout

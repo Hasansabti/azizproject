@@ -249,6 +249,7 @@ public class Activity_SP extends AppCompatActivity
                 intent.putExtra("price",item.getPrice());
                 intent.putExtra("start",item.getStart());
                 intent.putExtra("end",item.getEnd());
+                intent.putExtra("rating",item.getSprate());
                 intent.putExtra("status",item.getStatus());
 
                 startActivity(intent);

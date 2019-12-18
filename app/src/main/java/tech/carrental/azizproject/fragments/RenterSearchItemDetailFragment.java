@@ -9,6 +9,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -59,6 +60,7 @@ public class RenterSearchItemDetailFragment extends Fragment  implements OnMapRe
     String address;
     String city;
     String pincode;
+
     Button bookbtn;
 
     boolean deliver;
@@ -142,7 +144,7 @@ public class RenterSearchItemDetailFragment extends Fragment  implements OnMapRe
             public void onClick(View view) {
 
 
-                Renter_Car rent = new Renter_Car(UUID.randomUUID().toString(), mItem.getUuid(), FirebaseAuth.getInstance().getUid(), mItem.getUserid(), start, end, Integer.parseInt(mItem.getFair()) * mItem.getDays(), city, deliver, "waiting");
+                Renter_Car rent = new Renter_Car(UUID.randomUUID().toString(), mItem.getUuid(), FirebaseAuth.getInstance().getUid(), mItem.getUserid(), start, end, Integer.parseInt(mItem.getFair()) * mItem.getDays(), city, deliver, "waiting",-1,-1);
 
                 mDatabase.child("rents").child(rent.getId()).setValue(rent).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -168,8 +170,13 @@ public class RenterSearchItemDetailFragment extends Fragment  implements OnMapRe
         double lat = Double.parseDouble( latlang.split(",")[0]);
         double lon = Double.parseDouble( latlang.split(",")[1]);
 
+
         LatLng pune = new LatLng(lat, lon);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pune, MapUtils.STDZOOM));
+        final LatLng pos = mMap.getCameraPosition().target;
+        mMap.addMarker(new MarkerOptions().position(pos).title(mItem.getName()));
+
+
         //enableMyLocation(true);
     }
 }

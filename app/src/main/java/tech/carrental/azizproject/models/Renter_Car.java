@@ -12,10 +12,13 @@ public class Renter_Car {
     private String status;
     boolean deliver;
 
+    float sprate;
+    float renterrate;
+
     public Renter_Car(){
 
     }
-    public Renter_Car(String id, String carid, String requesterid, String ownerid, long start, long end, double price, String location, boolean deliver, String status) {
+    public Renter_Car(String id, String carid, String requesterid, String ownerid, long start, long end, double price, String location, boolean deliver, String status, float sprate,float renterrate) {
         this.id = id;
         this.carid = carid;
         this.requesterid = requesterid;
@@ -26,6 +29,8 @@ public class Renter_Car {
         this.location = location;
         this.status = status;
         this.deliver = deliver;
+        this.sprate = sprate;
+        this.renterrate = renterrate;
     }
 
     public String getId() {
@@ -66,5 +71,13 @@ public class Renter_Car {
 
     public boolean isDeliver() {
         return deliver;
+    }
+
+    public float getSprate() {
+        return sprate;
+    }
+
+    public float getRenterrate() {
+        return renterrate;
     }
 }

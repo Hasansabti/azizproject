@@ -198,6 +198,12 @@ public class LoginActivity extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         userdet = dataSnapshot.getValue(User.class);
 
+                        if(userdet == null){
+                            FirebaseAuth.getInstance().signOut();
+                            progress.setVisibility(View.GONE);
+                            return;
+                        }
+
                         if(userdet.isSp()){
                             Activity_SP.user = userdet;
                             startActivity(new Intent(LoginActivity.this, Activity_SP.class));
@@ -215,6 +221,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onCancelled(DatabaseError databaseError) {
                         login.setEnabled(true);
                         progress.setVisibility(View.GONE);
+                        Log.d("Login",databaseError.getDetails());
 
                     }
                 });

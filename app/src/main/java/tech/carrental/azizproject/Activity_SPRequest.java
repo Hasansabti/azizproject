@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -49,6 +50,10 @@ ProgressBar progress;
     private long start;
     private long end;
     private double price;
+    float rating;
+
+    RatingBar rb;
+    Button ratebtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +78,9 @@ ProgressBar progress;
         mEnd = findViewById(R.id.date_end);
         mPrice = findViewById(R.id.price);
         mStatus = findViewById(R.id.status);
+        rb = findViewById(R.id.rating);
+        ratebtn = findViewById(R.id.ratebtn);
+
 
 
         accept = findViewById(R.id.acceptbtn);
@@ -84,13 +92,53 @@ ProgressBar progress;
         start = getIntent().getLongExtra("start",0);
         end = getIntent().getLongExtra("end",0);
         status = getIntent().getStringExtra("status");
+        rating = getIntent().getFloatExtra("rating",-1);
+        if(rating != -1){
+            rb.setRating(rating);
+        }
 
         if (status.equalsIgnoreCase("declined") || status.equalsIgnoreCase("accepted")){
+            if(status.equalsIgnoreCase("accepted")){
+                ratebtn.setVisibility(View.VISIBLE);
+                rb.setVisibility(View.VISIBLE);
+            }else{
+                mStatus.setVisibility(View.VISIBLE);
+                ratebtn.setVisibility(View.GONE);
+                rb.setVisibility(View.GONE);
+            }
             accept.setVisibility(View.GONE);
             reject.setVisibility(View.GONE);
             mStatus.setText(status);
-            mStatus.setVisibility(View.VISIBLE);
+
+            if(rating >-1){
+                rb.setEnabled(false);
+                ratebtn.setVisibility(View.GONE);
+            }
+
+        }else{
+            ratebtn.setVisibility(View.GONE);
+            rb.setVisibility(View.GONE);
+            accept.setVisibility(View.VISIBLE);
+            reject.setVisibility(View.VISIBLE);
+            mStatus.setVisibility(View.GONE);
         }
+
+        ratebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progress.setVisibility(View.VISIBLE);
+                mDatabase.child("rents").child(rentid).child("sprate").setValue(rb.getRating()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        progress.setVisibility(View.GONE);
+                        Intent intent = new Intent(Activity_SPRequest.this, ResultActivity.class);
+                        intent.putExtra("message","User has been rated!");
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+            }
+        });
 
 
         rentid = getIntent().getStringExtra("rentid");

@@ -40,20 +40,6 @@
                     tools:context=".MapsActivity" />
             </LinearLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="382dp"
-                android:layout_marginTop="10dp"
-                android:elevation="16dp">
-
-                <ImageView
-                    android:id="@+id/markerimg"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_centerInParent="true"
-                    android:src="@drawable/ic_add_location_black_24dp" />
-            </RelativeLayout>
-
         </RelativeLayout>
 
         <Button

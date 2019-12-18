@@ -174,9 +174,10 @@ public class Activity_renter extends AppCompatActivity
 
                 }
                 if(gps.isChecked()){
-                    if(tvlocation.getText().toString().equalsIgnoreCase("Your location"))
-                        Toast.makeText(Activity_renter.this,"Missing location",Toast.LENGTH_SHORT).show();
+                    if(tvlocation.getText().toString().equalsIgnoreCase("Your location")) {
+                        Toast.makeText(Activity_renter.this, "Missing location", Toast.LENGTH_SHORT).show();
                         return;
+                    }
                 }else{
                     if(city.getSelectedItemPosition() == -1) {
                         Toast.makeText(Activity_renter.this,"Missing city",Toast.LENGTH_SHORT).show();

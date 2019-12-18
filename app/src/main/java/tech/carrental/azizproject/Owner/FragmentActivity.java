@@ -64,6 +64,7 @@ public class FragmentActivity extends AppCompatActivity {
         mSectionsStatePagerAdapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
 
         mViewPager = (ViewPager) findViewById(R.id.containter);
+        setTitle("Add car");
         //setup the pager
         setupViewPager(mViewPager);
         retrieveData();

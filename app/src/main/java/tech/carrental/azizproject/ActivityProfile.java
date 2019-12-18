@@ -68,7 +68,7 @@ public class ActivityProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile);
 
-        Appl = getApplication();
+        Appl = this;
         assert Appl != null;
         if (ContextCompat.checkSelfPermission(Appl, Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {

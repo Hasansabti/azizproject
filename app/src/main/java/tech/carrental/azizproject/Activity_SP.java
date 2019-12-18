@@ -85,8 +85,11 @@ public class Activity_SP extends AppCompatActivity
             Context context = requests.getContext();
             adapter = new RequestsAdapter(requestdata, this);
 
+            LinearLayoutManager llm = new LinearLayoutManager(context);
+            llm.setReverseLayout(true);
+            llm.setStackFromEnd(true);
+            requests.setLayoutManager(llm);
 
-            requests.setLayoutManager(new LinearLayoutManager(context));
             DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(requests.getContext(),
                     ((LinearLayoutManager)requests.getLayoutManager()).getOrientation());
             requests.addItemDecoration(dividerItemDecoration);
@@ -243,6 +246,11 @@ public class Activity_SP extends AppCompatActivity
                 intent.putExtra("carid",item.getCarid());
                 intent.putExtra("requesterid",item.getRequesterid());
                 intent.putExtra("details","Start: "+ item.getStart() +" - End: "+item.getEnd() +"\nLocation: " + item.getLocation() +"\nPrice: " + item.getPrice() +"\nDeliver:"+(item.isDeliver() ? "yes" : "no")+"\nStatus: " + item.getStatus()  );
+                intent.putExtra("price",item.getPrice());
+                intent.putExtra("start",item.getStart());
+                intent.putExtra("end",item.getEnd());
+                intent.putExtra("status",item.getStatus());
+
                 startActivity(intent);
                 return;
             }

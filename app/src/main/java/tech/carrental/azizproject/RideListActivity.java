@@ -26,7 +26,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import tech.carrental.azizproject.dummy.DummyContent;
 import tech.carrental.azizproject.fragments.RideDetailFragment;
 import tech.carrental.azizproject.models.Car;
 import tech.carrental.azizproject.models.Renter_Car;
@@ -249,7 +248,7 @@ public class RideListActivity extends AppCompatActivity {
                 super(view);
                 carname = (TextView) view.findViewById(R.id.carname);
                 date = (TextView) view.findViewById(R.id.date);
-                price = (TextView) view.findViewById(R.id.price);
+                price = (TextView) view.findViewById(R.id.date_end);
             }
         }
     }

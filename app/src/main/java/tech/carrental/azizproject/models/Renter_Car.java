@@ -5,8 +5,8 @@ public class Renter_Car {
     String carid;
     String requesterid;
     String ownerid;
-    String start;
-    String end;
+    long start;
+    long end;
     double price;
     String location;
     private String status;
@@ -15,7 +15,7 @@ public class Renter_Car {
     public Renter_Car(){
 
     }
-    public Renter_Car(String id, String carid, String requesterid, String ownerid, String start, String end, double price, String location, boolean deliver, String status) {
+    public Renter_Car(String id, String carid, String requesterid, String ownerid, long start, long end, double price, String location, boolean deliver, String status) {
         this.id = id;
         this.carid = carid;
         this.requesterid = requesterid;
@@ -44,11 +44,11 @@ public class Renter_Car {
         return ownerid;
     }
 
-    public String getStart() {
+    public long getStart() {
         return start;
     }
 
-    public String getEnd() {
+    public long getEnd() {
         return end;
     }
 

@@ -62,6 +62,8 @@ public class SPcarDetailActivity extends AppCompatActivity {
                     getIntent().getStringExtra(SPcarDetailFragment.ARG_ITEM_ID));
             arguments.putString("carname",
                     getIntent().getStringExtra("carname"));
+            arguments.putString("carid",
+                    getIntent().getStringExtra("carid"));
             SPcarDetailFragment fragment = new SPcarDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()

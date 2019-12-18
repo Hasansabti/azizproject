@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="company">
+        <item>Company</item>
         <item>Toyota</item>
         <item >Kia</item>
         <item >Nissan</item>

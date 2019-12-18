@@ -41,12 +41,14 @@ public class RenterSearchItemDetailActivity extends AppCompatActivity {
             Bundle arguments = new Bundle();
             arguments.putString(RenterSearchItemDetailFragment.ARG_ITEM_ID,
                     getIntent().getStringExtra(RenterSearchItemDetailFragment.ARG_ITEM_ID));
+            arguments.putString("latlong",
+                    getIntent().getStringExtra("latlong"));
 
-            arguments.putString("start",
-                    getIntent().getStringExtra("start"));
+            arguments.putLong("start",
+                    getIntent().getLongExtra("start",0));
 
-            arguments.putString("end",
-                    getIntent().getStringExtra("end"));
+            arguments.putLong("end",
+                    getIntent().getLongExtra("end",0));
 
 
             RenterSearchItemDetailFragment fragment = new RenterSearchItemDetailFragment();

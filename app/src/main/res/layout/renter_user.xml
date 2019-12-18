@@ -57,8 +57,8 @@
                     android:id="@+id/cityimg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignEnd="@+id/input_city"
-                    android:layout_alignBottom="@+id/input_city"
+                    android:layout_alignEnd="@+id/renter_phone"
+                    android:layout_alignBottom="@+id/renter_phone"
                     android:elevation="8dp"
                     android:padding="12dp"
                     android:src="@drawable/ic_pin_drop_black_24dp" />
@@ -109,7 +109,7 @@
                     android:visibility="gone">
 
                     <TextView
-                        android:id="@+id/input_location"
+                        android:id="@+id/input_license"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -129,7 +129,7 @@
                 </LinearLayout>
 
                 <Spinner
-                    android:id="@+id/input_city"
+                    android:id="@+id/renter_phone"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_below="@+id/locationll"

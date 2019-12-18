@@ -1,180 +1,217 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/acceptbtn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="#55D885"
-        android:enabled="true"
-        android:text="Book"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/rejectbtn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="#5599D8"
-        android:enabled="true"
-        android:text="Google Maps"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/acceptbtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView16"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="24dp"
-        android:text="Full details"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="500dp"
+        android:orientation="vertical">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="73dp" />
-
-    <LinearLayout
-        android:id="@+id/bill"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/locationll"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="16dp"
-        android:background="@drawable/cardview_border2"
-        android:elevation="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/rejectbtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline4">
 
         <RelativeLayout
-            android:layout_width="0dp"
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="7">
+            app:layout_constraintTop_toBottomOf="@+id/bill">
 
-            <TextView
-                android:id="@+id/distance"
+            <LinearLayout
+                android:id="@+id/ll"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="#cfd8dc"
-                android:gravity="center_vertical"
-                android:padding="16dp"
-                android:text="Days"
-                android:textColor="#000000" />
+                android:layout_height="wrap_content"
 
-            <TextView
-                android:id="@+id/fare"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_below="@+id/distance"
-                android:background="#cfd8dc"
-                android:gravity="center_vertical"
-                android:padding="16dp"
-                android:text="Fare"
-                android:textColor="#000000" />
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="#ffffff"
+                android:elevation="4dp"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/driver_cost"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_below="@+id/fare"
-                android:background="#cfd8dc"
-                android:gravity="center_vertical"
-                android:padding="16dp"
-                android:text="Driver Cost"
-                android:textColor="#000000" />
+                <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:map="http://schemas.android.com/apk/res-auto"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:id="@+id/mymap"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"
+                    tools:context=".MapsActivity" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/total_fare"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_below="@+id/driver_cost"
-                android:layout_marginTop="8dp"
-                android:background="#cfd8dc"
-                android:gravity="center_vertical"
-                android:padding="16dp"
-                android:text="Total Fare"
-                android:textColor="#000000" />
+                android:layout_height="382dp"
+                android:layout_marginTop="10dp"
+                android:elevation="16dp">
+
+                <ImageView
+                    android:id="@+id/markerimg"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/ic_add_location_black_24dp" />
+            </RelativeLayout>
+
         </RelativeLayout>
 
-        <RelativeLayout
+        <Button
+            android:id="@+id/acceptbtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3">
+            android:layout_gravity="start"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="#55D885"
+            android:enabled="true"
+            android:text="Book"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
 
-            <TextView
-                android:id="@+id/startDate"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="#ffffff"
-                android:gravity="center_vertical"
-                android:padding="16dp"
-                android:text="@string/emptyText"
-                android:textColor="#000000" />
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="24dp"
+            android:text="Full details"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/endDate"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_below="@+id/startDate"
-                android:background="#ffffff"
-                android:gravity="center_vertical"
-                android:padding="16dp"
-                android:text="@string/emptyText"
-                android:textColor="#000000" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="73dp" />
 
-            <TextView
-                android:id="@+id/input_city"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_below="@+id/endDate"
-                android:background="#ffffff"
-                android:gravity="center_vertical"
-                android:padding="16dp"
-                android:text="@string/emptyText"
-                android:textColor="#000000" />
+        <LinearLayout
+            android:id="@+id/bill"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/locationll"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="16dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/cardview_border2"
+            android:elevation="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline4">
 
-            <TextView
-                android:id="@+id/total"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_below="@+id/input_city"
-                android:layout_marginTop="8dp"
-                android:background="#ffffff"
-                android:gravity="center_vertical"
-                android:padding="16dp"
-                android:text="@string/emptyText"
-                android:textColor="#000000" />
-        </RelativeLayout>
-    </LinearLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="7">
+
+                <TextView
+                    android:id="@+id/distance"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="#cfd8dc"
+                    android:gravity="center_vertical"
+                    android:padding="16dp"
+                    android:text="Days"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/fare"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/distance"
+                    android:background="#cfd8dc"
+                    android:gravity="center_vertical"
+                    android:padding="16dp"
+                    android:text="Fare"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/phonelbl"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/fare"
+                    android:background="#cfd8dc"
+                    android:gravity="center_vertical"
+                    android:padding="16dp"
+                    android:text="Driver Cost"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/total_fare"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/phonelbl"
+                    android:layout_marginTop="8dp"
+                    android:background="#cfd8dc"
+                    android:gravity="center_vertical"
+                    android:padding="16dp"
+                    android:text="Total Fare"
+                    android:textColor="#000000" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3">
+
+                <TextView
+                    android:id="@+id/renter_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="#ffffff"
+                    android:gravity="center_vertical"
+                    android:padding="16dp"
+                    android:text="@string/emptyText"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/renter_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/renter_name"
+                    android:background="#ffffff"
+                    android:gravity="center_vertical"
+                    android:padding="16dp"
+                    android:text="@string/emptyText"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/renter_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/renter_id"
+                    android:background="#ffffff"
+                    android:gravity="center_vertical"
+                    android:padding="16dp"
+                    android:text="@string/emptyText"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/date_start"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/renter_phone"
+                    android:layout_marginTop="8dp"
+                    android:background="#ffffff"
+                    android:gravity="center_vertical"
+                    android:padding="16dp"
+                    android:text="@string/emptyText"
+                    android:textColor="#000000" />
+            </RelativeLayout>
+        </LinearLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

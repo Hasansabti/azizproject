@@ -108,9 +108,8 @@
         android:phoneNumber="true"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/input_location" />
+        app:layout_constraintStart_toEndOf="@+id/imageView4"
+        app:layout_constraintTop_toBottomOf="@+id/update_pass" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -118,26 +117,28 @@
         android:layout_height="0dp"
         android:src="@drawable/location"
         app:layout_constraintBottom_toBottomOf="@+id/input_mobile_no"
-        app:layout_constraintEnd_toEndOf="@+id/imageView3"
-        app:layout_constraintStart_toStartOf="@+id/imageView3"
+        app:layout_constraintEnd_toStartOf="@+id/update_pass"
+        app:layout_constraintStart_toStartOf="@+id/imageView2"
         app:layout_constraintTop_toTopOf="@+id/input_mobile_no"
         app:srcCompat="@drawable/call"
         tools:srcCompat="@drawable/call" />
 
-    <EditText
-        android:id="@+id/input_location"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+    <ImageButton
+        android:id="@+id/input_license"
+        android:layout_width="59dp"
+        android:layout_height="51dp"
 
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginTop="8dp"
         android:hint="Location"
         android:imeActionLabel="@string/action_sign_in_short"
         android:imeOptions="actionDone"
         android:selectAllOnFocus="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/update_pass" />
+        android:src="@drawable/license"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/update_pass"
+        app:layout_constraintHorizontal_bias="0.54"
+        app:layout_constraintStart_toStartOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/input_mobile_no" />
 
     <EditText
         android:id="@+id/update_pass"
@@ -162,7 +163,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="#294A72"
@@ -172,7 +173,7 @@
         app:layout_constraintBottom_toTopOf="@+id/login2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_mobile_no" />
+        app:layout_constraintTop_toBottomOf="@+id/input_license" />
 
     <Button
         android:id="@+id/login2"
@@ -266,23 +267,24 @@
 
     </RadioGroup>
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@drawable/location"
-        app:layout_constraintBottom_toBottomOf="@+id/input_location"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/input_location"
-        app:layout_constraintVertical_bias="0.0" />
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="68dp" />
+
+    <TextView
+        android:id="@+id/liceselbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Driver License"
+        android:textSize="18sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/input_license"
+        app:layout_constraintStart_toStartOf="@+id/input_mobile_no"
+        app:layout_constraintTop_toTopOf="@+id/input_license"
+        app:layout_constraintVertical_bias="0.406" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

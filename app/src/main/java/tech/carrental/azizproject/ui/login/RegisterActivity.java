@@ -1,22 +1,38 @@
 package tech.carrental.azizproject.ui.login;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -25,12 +41,17 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import org.json.JSONObject;
 
+import tech.carrental.azizproject.ActivityProfile;
 import tech.carrental.azizproject.Activity_SP;
 import tech.carrental.azizproject.Activity_renter;
 import tech.carrental.azizproject.R;
+import tech.carrental.azizproject.Utils.PermissionsUtils;
 import tech.carrental.azizproject.models.User;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -42,7 +63,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText mPassword;
     EditText natID;
     EditText mMobileNo;
-    EditText mCity;
+
     String mPort="8000";
     JSONObject registrationDetails;
     RadioGroup type;
@@ -51,6 +72,18 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     ProgressBar progressBar;
+
+    RadioButton renterrb;
+    RadioButton sprb;
+
+    ImageButton license;
+    TextView liclbl;
+
+    public static Uri imageUri=null;
+    public static Bitmap bitmap;
+    private static final int PICK_IMAGE = 1;
+    private static final int STORAGE_PERMISSION_REQUEST_CODE = 2;
+    Context Appl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,16 +95,50 @@ public class RegisterActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register2);
+
+        Appl = this;
+        assert Appl != null;
+        if (ContextCompat.checkSelfPermission(Appl, Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Permission to access the location is missing.
+            PermissionsUtils.requestPermission((AppCompatActivity) Appl, STORAGE_PERMISSION_REQUEST_CODE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE, true);
+        }
+
 //        registrationDetails=new JSONObject();
         mRegisterButton=findViewById(R.id.register_button);
         mName =findViewById(R.id.input_name);
         mEmail =findViewById(R.id.input_email);
         mPassword=findViewById(R.id.update_pass);
         natID = findViewById(R.id.input_natid);
-        mCity = findViewById(R.id.input_location);
+//        mCity = findViewById(R.id.input_license);
         mMobileNo = findViewById(R.id.input_mobile_no);
         type = findViewById(R.id.type);
         progressBar = findViewById(R.id.progress_reg);
+        renterrb = findViewById(R.id.type1);
+        sprb = findViewById(R.id.type2);
+        license = findViewById(R.id.input_license);
+        liclbl = findViewById(R.id.liceselbl);
+
+        license.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openGallery();
+            }
+        });
+
+        sprb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    license.setVisibility(View.VISIBLE);
+                    liclbl.setVisibility(View.VISIBLE);
+                }else {
+                    license.setVisibility(View.INVISIBLE);
+                    liclbl.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
         mRegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,13 +153,13 @@ public class RegisterActivity extends AppCompatActivity {
                     String pw= mPassword.getText().toString().trim();
                     final String mobileno = mMobileNo.getText().toString().trim();
                     final String id = natID.getText().toString().trim();
-                    final String city = mCity.getText().toString().trim();
+                   // final String city = mCity.getText().toString().trim();
 
                     int selectedtype = type.getCheckedRadioButtonId();
                     if(selectedtype == R.id.type1){
-                        isrenter = false;
-                    }else if(selectedtype == R.id.type2){
                         isrenter = true;
+                    }else if(selectedtype == R.id.type2){
+                        isrenter = false;
                     }
 
 
@@ -103,10 +170,11 @@ public class RegisterActivity extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task<AuthResult> task) {
 
+
                                         if (task.isSuccessful()) {
                                             // Sign in success, update UI with the signed-in user's information
                                             Log.d(TAG, "createUserWithEmail:success");
-                                             userdet = new User(name,email,id,isrenter,city,mobileno);
+                                             userdet = new User(name,email,id,isrenter,mobileno);
                                             final FirebaseUser user = mAuth.getCurrentUser();
                                             mDatabase.child("users").child(user.getUid()).setValue(userdet).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
@@ -121,6 +189,23 @@ public class RegisterActivity extends AppCompatActivity {
 
                                                 }
                                             });
+
+                                            if(imageUri != null) {
+                                                StorageReference ref = FirebaseStorage.getInstance().getReference().child("images/licenses/" + task.getResult().getUser().getUid());
+                                                ref.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                                    @Override
+                                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                                        // progressDialog.dismiss();
+                                                      //  Toast.makeText(RegisterActivity.this, "Uploaded license", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                }).addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        //  progressDialog.dismiss();
+                                                        Toast.makeText(RegisterActivity.this, "Failed license" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                    }
+                                                });
+                                            }
 
 
 
@@ -157,7 +242,11 @@ public class RegisterActivity extends AppCompatActivity {
         String pw= mPassword.getText().toString().trim();
         String mobileno = mMobileNo.getText().toString().trim();
         String id = natID.getText().toString().trim();
-        String city = mCity.getText().toString().trim();
+       // String city = mCity.getText().toString().trim();
+        if(!renterrb.isChecked() && !sprb.isChecked()){
+            valid = false;
+            Toast.makeText(RegisterActivity.this,"Select renter or service provider",Toast.LENGTH_SHORT).show();
+        }
         if((name.length() == 0) ){
             mName.setError("Name is required");
             valid=false;
@@ -182,14 +271,46 @@ public class RegisterActivity extends AppCompatActivity {
             valid=false;
         }
         else natID.setError(null);
-        if(city.length()==0){
-            mCity.setError("Please enter your city");
-            valid=false;
+
+        if(sprb.isChecked() && imageUri == null){
+            valid = false;
+            Toast.makeText(this,"Please updoad your license",Toast.LENGTH_SHORT).show();
         }
-        else mCity.setError(null);
+
+
+
+
         return valid;
     }
+    private void openGallery(){
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(galleryIntent, PICK_IMAGE);
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
 
+        switch (requestCode){
+            case PICK_IMAGE:
+                if(resultCode == RESULT_OK){
+                    imageUri = data.getData();
+                    String[] projecttion = {MediaStore.Images.Media.DATA}; //fetch media path
+
+                    Cursor cursor = Appl.getContentResolver().query(imageUri, projecttion, null, null, null);
+                    cursor.moveToFirst();
+
+                    int column_index = cursor.getColumnIndex(projecttion[0]);
+                    String filepath = cursor.getString(column_index);
+                    cursor.close();
+
+                    bitmap = BitmapFactory.decodeFile(filepath);
+                    Glide.with(getApplicationContext())
+                            .load(imageUri)
+                            .into(license);
+                    license.setVisibility(View.VISIBLE);
+                }
+        }
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);

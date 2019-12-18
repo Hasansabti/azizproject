@@ -148,6 +148,7 @@ public class SPcarListActivity extends AppCompatActivity {
                     Bundle arguments = new Bundle();
                     arguments.putString(SPcarDetailFragment.ARG_ITEM_ID, item.getUuid());
                     arguments.putString("carname", item.getName());
+                    arguments.putString("carid", item.getUuid());
                     SPcarDetailFragment fragment = new SPcarDetailFragment();
                     fragment.setArguments(arguments);
                     mParentActivity.getSupportFragmentManager().beginTransaction()
@@ -158,6 +159,7 @@ public class SPcarListActivity extends AppCompatActivity {
                     Intent intent = new Intent(context, SPcarDetailActivity.class);
                     intent.putExtra(SPcarDetailFragment.ARG_ITEM_ID, item.getUuid());
                     intent.putExtra("carname", item.getName());
+                    intent.putExtra("carid", item.getUuid());
 
 
                     context.startActivity(intent);

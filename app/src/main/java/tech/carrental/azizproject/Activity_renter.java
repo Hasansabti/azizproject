@@ -104,8 +104,8 @@ public class Activity_renter extends AppCompatActivity
         location = findViewById(R.id.locationll);
         cityimage = findViewById(R.id.cityimg);
         pb_addr = findViewById(R.id.pb_address);
-        city  =findViewById(R.id.input_city);
-        tvlocation = findViewById(R.id.input_location);
+        city  =findViewById(R.id.renter_phone);
+        tvlocation = findViewById(R.id.input_license);
         gps = findViewById(R.id.gps);
         deliver = findViewById(R.id.deliver);
         edittextstart = findViewById(R.id.start);
@@ -188,8 +188,8 @@ public class Activity_renter extends AppCompatActivity
                 edittextstart.setError(null);
                 edittextend.setError(null);
                 Intent intent = new Intent(Activity_renter.this,RenterSearchItemListActivity.class);
-                intent.putExtra("start",edittextstart.getText().toString());
-                intent.putExtra("end",edittextend.getText().toString());
+                intent.putExtra("start",startDate.getTime());
+                intent.putExtra("end",endDate.getTime());
                 if(gps.isChecked())
                     intent.putExtra("city",citytxt);
                 else

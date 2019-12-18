@@ -52,8 +52,8 @@ public class FragmentMap extends Fragment {
         View root=  inflater.inflate(R.layout.fragment_fragment_map, container, false);
         fa=((FragmentActivity)getActivity());
 
-        mCity=root.findViewById(R.id.input_city);
-        mLocation=root.findViewById(R.id.location);
+        mCity=root.findViewById(R.id.renter_phone);
+        mLocation=root.findViewById(R.id.renter_phone);
         mapSnapshot=root.findViewById(R.id.map_snap);
         pb_addr=root.findViewById(R.id.pb_address);
         Next=root.findViewById(R.id.next);
@@ -129,7 +129,7 @@ public class FragmentMap extends Fragment {
                 for(Address a:al){
                     Log.d("cars", "doInBackground: "+a.toString());
                 }
-                address=myLoc.getAddressLine(0);
+                address=myLoc.getLatitude()+","+myLoc.getLongitude();
                 city=myLoc.getLocality();
                 pincode=myLoc.getPostalCode();
             } catch (Exception e) {

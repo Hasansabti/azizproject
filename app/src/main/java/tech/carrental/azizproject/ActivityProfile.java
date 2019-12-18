@@ -138,21 +138,22 @@ public class ActivityProfile extends AppCompatActivity {
 
                 if(isValidate()) {
                     progressBar.setVisibility(View.VISIBLE);
-                    StorageReference ref = sref.child("images/licenses/"+FirebaseAuth.getInstance().getCurrentUser().getUid());
-                    ref.putFile(imageUri)            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            // progressDialog.dismiss();
-                            Toast.makeText(ActivityProfile.this, "Uploaded license", Toast.LENGTH_SHORT).show();
-                        }
-                    })    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            //  progressDialog.dismiss();
-                            Toast.makeText(ActivityProfile.this, "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
+                    if(imageUri != null) {
+                        StorageReference ref = sref.child("images/licenses/" + FirebaseAuth.getInstance().getCurrentUser().getUid());
+                        ref.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                // progressDialog.dismiss();
+                                Toast.makeText(ActivityProfile.this, "Uploaded license", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                //  progressDialog.dismiss();
+                                Toast.makeText(ActivityProfile.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
                     if(mPassword.getText().toString().length() > 0) {
                         FirebaseAuth.getInstance().getCurrentUser().updatePassword(mPassword.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override

@@ -57,7 +57,7 @@
         <TextView
             android:maxLines="4"
             android:layout_weight="1"
-            android:id="@+id/location"
+            android:id="@+id/renter_phone"
             android:padding="16dp"
             android:gravity="center_vertical"
             android:text="Your location"
@@ -74,7 +74,7 @@
     </LinearLayout>
     <TextView
         android:layout_below="@+id/locationll"
-        android:id="@+id/input_city"
+        android:id="@+id/renter_phone"
         android:padding="16dp"
         android:backgroundTint="#cfd8dc"
         android:background="@drawable/round_corner"
@@ -87,7 +87,7 @@
     <ProgressBar
         android:visibility="gone"
         android:id="@+id/pb_address"
-        android:layout_below="@+id/input_city"
+        android:layout_below="@+id/renter_phone"
         android:layout_width="match_parent"
         android:layout_height="40dp" />
 </RelativeLayout>

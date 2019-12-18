@@ -79,7 +79,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/input_location" />
+        app:layout_constraintTop_toBottomOf="@+id/input_license" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -94,7 +94,7 @@
         tools:srcCompat="@drawable/call" />
 
     <EditText
-        android:id="@+id/input_location"
+        android:id="@+id/input_license"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
 
@@ -255,10 +255,10 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:src="@drawable/location"
-        app:layout_constraintBottom_toBottomOf="@+id/input_location"
+        app:layout_constraintBottom_toBottomOf="@+id/input_license"
         app:layout_constraintEnd_toEndOf="@+id/imageView2"
         app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/input_location"
+        app:layout_constraintTop_toTopOf="@+id/input_license"
         app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.widget.Guideline

@@ -16,7 +16,10 @@ import tech.carrental.azizproject.models.Car;
 import tech.carrental.azizproject.models.Renter_Car;
 import tech.carrental.azizproject.models.SPrequest;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 
 public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.ViewHolder> {
@@ -43,7 +46,17 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.ViewHo
         holder.mItem = mValues.get(position);
         for(Car car : Activity_SP.cars) {
             if(car.getUuid().equalsIgnoreCase(mValues.get(position).getCarid())) {
-                holder.car.setText(car.getName()+": "+ mValues.get(position).getStart() + " - " + mValues.get(position).getEnd());
+
+                Date start = new Date();
+                start.setTime((long) mValues.get(position).getStart());
+                Date end = new Date();
+                end.setTime((long) mValues.get(position).getEnd());
+                SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yy", Locale.getDefault());
+
+
+
+                holder.car.setText(car.getName()+": "+ sdf.format(start) + " - " + sdf.format(end));
+            break;
             }
         }
 
@@ -69,6 +82,7 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.ViewHo
         public final TextView car;
         Button button;
         public Renter_Car mItem;
+
         //public Button accept;
 
         public ViewHolder(View view) {

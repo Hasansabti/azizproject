@@ -23,7 +23,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.ByteArrayOutputStream;
-import java.security.Permission;
 
 import tech.carrental.azizproject.Utils.MapUtils;
 import tech.carrental.azizproject.Utils.PermissionsUtils;
@@ -44,7 +43,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+                .findFragmentById(R.id.mymap);
         mapFragment.getMapAsync(this);
         markerImg = findViewById(R.id.markerimg);
         btnSubmit = findViewById(R.id.btn_setLocation);

@@ -1,17 +1,13 @@
 package tech.carrental.azizproject.Owner;
 
-import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import android.util.Base64;
-import android.util.Log;
-import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -29,9 +25,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.util.UUID;
@@ -111,11 +104,11 @@ public class SecondActivity extends AppCompatActivity {
     }
 
     private void setTextViews() {
-        carName.setText(model);
-        seatstv.setText(seats);
-        rate.setText(fair);
+        carName.setText(car_name);
+        seatstv.setText("Seats: " + seats);
+        rate.setText("Price:" + fair);
         type.setText(ftype);
-        regis.setText(regno);
+        regis.setText("Model:" +regno);
         carImage.setImageBitmap(bitmap);
     }
 
@@ -123,7 +116,7 @@ public class SecondActivity extends AppCompatActivity {
 
         carName= findViewById(R.id.name);
         carImage= findViewById(R.id.car_image);
-        seatstv= findViewById(R.id.seater);
+        seatstv= findViewById(R.id.date_start);
         rating= findViewById(R.id.rating);
         type= findViewById(R.id.type);
         rate= findViewById(R.id.rate_name);

@@ -29,10 +29,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import tech.carrental.azizproject.dummy.DummyRentercar;
 import tech.carrental.azizproject.fragments.RenterSearchItemDetailFragment;
 import tech.carrental.azizproject.models.Car;
-import tech.carrental.azizproject.models.Renter_Car;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -141,10 +139,11 @@ public class RenterSearchItemListActivity extends AppCompatActivity {
                     Context context = view.getContext();
                     Intent intent = new Intent(context, RenterSearchItemDetailActivity.class);
                     intent.putExtra(RenterSearchItemDetailFragment.ARG_ITEM_ID, ""+item.getUuid());
-                    intent.putExtra("start",mParentActivity.getIntent().getStringExtra("start"));
-                    intent.putExtra("end",mParentActivity.getIntent().getStringExtra("end"));
+                    intent.putExtra("start",mParentActivity.getIntent().getLongExtra("start",0));
+                    intent.putExtra("end",mParentActivity.getIntent().getLongExtra("end",0));
                     intent.putExtra("city",mParentActivity.getIntent().getStringExtra("city"));
-                    intent.putExtra("deliver",mParentActivity.getIntent().getBooleanArrayExtra("deliver"));
+                    intent.putExtra("latlong",item.getLocation());
+                    intent.putExtra("deliver",mParentActivity.getIntent().getBooleanExtra("deliver",false));
 
                     context.startActivity(intent);
                 }
@@ -216,7 +215,7 @@ public class RenterSearchItemListActivity extends AppCompatActivity {
                 super(view);
                 name =  view.findViewById(R.id.update_name);
                 owner =  view.findViewById(R.id.company);
-                price =  view.findViewById(R.id.price);
+                price =  view.findViewById(R.id.date_end);
                 image = view.findViewById(R.id.car_image);
                 type = view.findViewById(R.id.type);
 

@@ -5,6 +5,187 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:id="@+id/bill"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@+id/locationll"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/cardview_border2"
+        android:elevation="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/endlbl"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/total_fare"
+                android:background="#cfd8dc"
+                android:gravity="center_vertical"
+                android:padding="16dp"
+                android:text="End"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/total_fare4"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/endlbl"
+                android:background="#cfd8dc"
+                android:gravity="center_vertical"
+                android:padding="16dp"
+                android:text="Price"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/distance"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#cfd8dc"
+                android:gravity="center_vertical"
+                android:padding="16dp"
+                android:text="Renter"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/fare"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/distance"
+                android:background="#cfd8dc"
+                android:gravity="center_vertical"
+                android:padding="16dp"
+                android:text="Renter ID"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/phonelbl"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/fare"
+                android:background="#cfd8dc"
+                android:gravity="center_vertical"
+                android:padding="16dp"
+                android:text="Phone"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/total_fare"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/evlbl"
+                android:background="#cfd8dc"
+                android:gravity="center_vertical"
+                android:padding="16dp"
+                android:text="Start"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/evlbl"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/phonelbl"
+                android:background="#cfd8dc"
+                android:gravity="center_vertical"
+                android:padding="16dp"
+                android:text="Evaluation"
+                android:textColor="#000000" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3">
+
+            <TextView
+                android:id="@+id/renter_eval"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/renter_phone"
+                android:background="#ffffff"
+                android:gravity="center_vertical"
+                android:padding="16dp"
+                android:text="@string/emptyText"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/date_end"
+                android:background="#ffffff"
+                android:gravity="center_vertical"
+                android:padding="16dp"
+                android:text="@string/emptyText"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/date_end"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/date_start"
+                android:background="#ffffff"
+                android:gravity="center_vertical"
+                android:padding="16dp"
+                android:text="@string/emptyText"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/renter_name"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#ffffff"
+                android:gravity="center_vertical"
+                android:padding="16dp"
+                android:text="@string/emptyText"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/renter_id"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/renter_name"
+                android:background="#ffffff"
+                android:gravity="center_vertical"
+                android:padding="16dp"
+                android:text="@string/emptyText"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/renter_phone"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/renter_id"
+                android:background="#ffffff"
+                android:gravity="center_vertical"
+                android:padding="16dp"
+                android:text="@string/emptyText"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/date_start"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/renter_eval"
+                android:background="#ffffff"
+                android:gravity="center_vertical"
+                android:padding="16dp"
+                android:text="@string/emptyText"
+                android:textColor="#000000" />
+        </RelativeLayout>
+    </LinearLayout>
+
     <Button
         android:id="@+id/acceptbtn"
         android:layout_width="0dp"
@@ -60,26 +241,6 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="73dp" />
 
-    <TextView
-        android:id="@+id/details"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:text="rent detail"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_details" />
-
-    <TextView
-        android:id="@+id/user_details"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="16dp"
-        android:text="user detail"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline4" />
-
     <ProgressBar
         android:id="@+id/progress"
         style="?android:attr/progressBarStyle"
@@ -88,7 +249,19 @@
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/acceptbtn"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Status"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/details" />
+        app:layout_constraintTop_toBottomOf="@+id/bill" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

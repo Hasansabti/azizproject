@@ -1,10 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/spcar_detail"
-    style="?android:attr/textAppearanceLarge"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp"
-    android:textIsSelectable="true"
-    tools:context=".SPcarDetailFragment" />
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/delete_car"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/colorAccent"
+        android:enabled="true"
+        android:text="Delete Car"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/delete_prog" />
+
+    <LinearLayout
+        android:id="@+id/bill"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@+id/locationll"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="16dp"
+        android:background="@drawable/cardview_border2"
+        android:elevation="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/carimg">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="7">
+
+            <TextView
+                android:id="@+id/total_fare4"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/total_fare"
+                android:background="#cfd8dc"
+                android:gravity="center_vertical"
+                android:padding="16dp"
+                android:text="Price"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/distance"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#cfd8dc"
+                android:gravity="center_vertical"
+                android:padding="16dp"
+                android:text="Model"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/fare"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/distance"
+                android:background="#cfd8dc"
+                android:gravity="center_vertical"
+                android:padding="16dp"
+                android:text="Fuel Type"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/phonelbl"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/fare"
+                android:background="#cfd8dc"
+                android:gravity="center_vertical"
+                android:padding="16dp"
+                android:text="Location"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/total_fare"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/phonelbl"
+                android:background="#cfd8dc"
+                android:gravity="center_vertical"
+                android:padding="16dp"
+                android:text="Seater"
+                android:textColor="#000000" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3">
+
+            <TextView
+                android:id="@+id/date_end"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/date_start"
+                android:background="#ffffff"
+                android:gravity="center_vertical"
+                android:padding="16dp"
+                android:text="@string/emptyText"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/renter_name"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#ffffff"
+                android:gravity="center_vertical"
+                android:padding="16dp"
+                android:text="@string/emptyText"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/renter_id"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/renter_name"
+                android:background="#ffffff"
+                android:gravity="center_vertical"
+                android:padding="16dp"
+                android:text="@string/emptyText"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/renter_phone"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/renter_id"
+                android:background="#ffffff"
+                android:gravity="center_vertical"
+                android:padding="16dp"
+                android:text="@string/emptyText"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/date_start"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/renter_phone"
+                android:background="#ffffff"
+                android:gravity="center_vertical"
+                android:padding="16dp"
+                android:text="@string/emptyText"
+                android:textColor="#000000" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/carimg"
+        android:layout_width="337dp"
+        android:layout_height="185dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/car"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/delete_prog"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bill" />
+</androidx.constraintlayout.widget.ConstraintLayout>
